@@ -1,13 +1,17 @@
 <template>
-  <div id="app">
-   
+  <div id='app'>
+    <CreateElection/>
   </div>
 </template>
 
 <script>
+import CreateElection from './components/CreateElection.vue'
+
 export default {
   name: 'App',
-  components: {},
+  components: {
+    CreateElection
+  },
 }
 </script>
 

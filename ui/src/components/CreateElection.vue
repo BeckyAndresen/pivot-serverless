@@ -8,7 +8,8 @@
       </div>
       <div class='election-input'>
         <label for='election-candidates'>Election Candidates: </label>
-        <input type='textarea' id='election-candidates' v-model='electionCandidates'>
+        <textarea id='election-candidates' v-model='electionCandidates'>
+        </textarea>
       </div>
       <div class='election-input'>
         <button type='submit'>Submit</button>
@@ -20,9 +21,6 @@
 <script>
 export default {
   name: 'CreateElection',
-  props: {
-    msg: String
-  },
   data: function() {
     return {
       WEB_SERVICE_ROOT: this.$config.WEB_SERVICE_ROOT,
@@ -43,6 +41,10 @@ export default {
 
 div {
   padding: 1em;
+}
+
+textarea {
+  display: block;
 }
 
 .election-input {

@@ -4,11 +4,11 @@
     <form id='create-election' @submit='createElection'>
       <div class='election-input'>
         <label for='election-name'>Election Name: </label>
-        <input type='text' id='election-name'>
+        <input type='text' id='election-name' v-model='electionName'>
       </div>
       <div class='election-input'>
         <label for='election-candidates'>Election Candidates: </label>
-        <input type='text' id='election-candidates'>
+        <input type='textarea' id='election-candidates' v-model='electionCandidates'>
       </div>
       <div class='election-input'>
         <button type='submit'>Submit</button>
@@ -26,6 +26,8 @@ export default {
   data: function() {
     return {
       WEB_SERVICE_ROOT: this.$config.WEB_SERVICE_ROOT,
+      electionName: '',
+      electionCandidates: '',
     };
   },
   methods: {

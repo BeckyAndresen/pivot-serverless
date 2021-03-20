@@ -1,36 +1,51 @@
 <template>
   <div class='create-election'>
     <h2>Create Election</h2>
-    <form id='create-election' @submit='createElection'>
-      <div class='election-input'>
-        <label for='election-name'>Election Name: </label>
-        <input type='text' id='election-name' v-model='electionName'>
-      </div>
-      <div class='election-input'>
-        <label for='election-candidates'>Election Candidates: </label>
-        <textarea id='election-candidates' v-model='electionCandidates'>
-        </textarea>
-      </div>
-      <div class='election-input'>
-        <button type='submit'>Submit</button>
-      </div>
-    </form>
+    <div class='election-input'>
+      <label for='election-name'>Election Name: </label>
+      <input type='text' id='election-name' v-model='electionName'>
+    </div>
+    <div class='election-input'>
+      <label for='election-candidates'>Election Candidates: </label>
+      <textarea id='election-candidates' v-model='electionCandidates'>
+      </textarea>
+    </div>
+    <div class='election-input'>
+      <button @click='createElection'>Submit</button>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
+function separateCandidateNames(electionCandidates) {
+  const candidates = electionCandidates.split(',').map(function(candidateName) {
+    return candidateName.trim();
+  });
+  return candidates;
+}
+
 export default {
   name: 'CreateElection',
   data: function() {
     return {
-      WEB_SERVICE_ROOT: this.$config.WEB_SERVICE_ROOT,
+      WEB_SERVICE: (this.$config.WEB_SERVICE_ROOT + 'election'),
       electionName: '',
       electionCandidates: '',
     };
   },
   methods: {
     createElection() {
-      console.log('TODO: create the election');
+      const candidates = separateCandidateNames(this.electionCandidates);
+      axios({
+        method: 'post',
+        url: this.WEB_SERVICE,
+        data: {
+          electionName: this.electionName,
+          electionCandidates: candidates,
+        }
+      });
     },
   },
 }
